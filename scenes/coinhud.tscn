@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm0nib28a0hba"]
+
+[ext_resource type="FontFile" uid="uid://c8iv1wskrnq3q" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_u4ndy"]
+[ext_resource type="Texture2D" uid="uid://dl12c3uey7hq5" path="res://assets/sprites/coin.png" id="3_vdc1c"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Coin" type="Sprite2D" parent="."]
+position = Vector2(2.3841858e-07, 2.3841858e-07)
+scale = Vector2(1.9250001, 1.8437501)
+texture = ExtResource("3_vdc1c")
+region_enabled = true
+region_rect = Rect2(0, 0, 15.701331, 16)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 18.0
+offset_top = -8.0
+offset_right = 39.0
+offset_bottom = 8.0
+theme_override_colors/font_outline_color = Color(0, 0, 0.003921569, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_u4ndy")
+theme_override_font_sizes/font_size = 16
+text = "X "
+vertical_alignment = 3
+autowrap_mode = 2
+justification_flags = 131

@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://cw00qf7yvfm6t"]
+
+[ext_resource type="Script" uid="uid://bv4685irgipft" path="res://scripts/timer.gd" id="1_g5y8c"]
+[ext_resource type="Texture2D" uid="uid://dbnxx1hir4tjs" path="res://assets/sprites/clock.png" id="2_5lxq6"]
+[ext_resource type="FontFile" uid="uid://c8iv1wskrnq3q" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_u4ndy"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g5y8c")
+
+[node name="StopwatchLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 18.0
+offset_top = -6.0
+offset_right = 42.0
+offset_bottom = 10.0
+theme_override_colors/font_outline_color = Color(0, 0, 0.003921569, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("2_u4ndy")
+theme_override_font_sizes/font_size = 16
+text = "X "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Clock" type="Sprite2D" parent="."]
+position = Vector2(-1.9073486e-06, -1.9073486e-06)
+scale = Vector2(0.021, 0.021)
+texture = ExtResource("2_5lxq6")
