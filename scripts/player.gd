@@ -4,23 +4,35 @@ const SPEED = 130.0
 const JUMP_VELOCITY = -300.0
 const FLY_SPEED = 180.0
 
-var is_flying := false # mod terbang
+const MAX_JUMPS = 1
+
+var jump_count := 0
+var is_flying := false
 var current_portal = null
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var jump_sound: AudioStreamPlayer2D = $JumpSound
 
+
 func _physics_process(delta: float) -> void:
+	
+	# === RESET JUMP SAAT NYENTUH TANAH ===
+	if is_on_floor():
+		jump_count = 0
+	
+	
 	# === TOGGLE FLY MODE ===
 	if Input.is_action_just_pressed("fly_toggle"):
 		is_flying = !is_flying
 		velocity.y = 0
-		
-	# === INTERACT === #
+	
+	
+	# === INTERACT ===
 	if Input.is_action_just_pressed("Interact"):
 		if current_portal != null:
 			current_portal.interact()
-			
+	
+	
 	# === VERTICAL MOVEMENT ===
 	if is_flying:
 		velocity.y = 0
@@ -29,16 +41,19 @@ func _physics_process(delta: float) -> void:
 			velocity.y = -FLY_SPEED
 		elif Input.is_action_pressed("fly_down"):
 			velocity.y = FLY_SPEED
+	
 	else:
-		# Gravity normal
+		# Gravity
 		if not is_on_floor():
 			velocity += get_gravity() * delta
 
-		if Input.is_action_just_pressed("jump") and is_on_floor():
+		# DOUBLE JUMP SYSTEM
+		if Input.is_action_just_pressed("jump") and jump_count < MAX_JUMPS:
 			velocity.y = JUMP_VELOCITY
+			jump_count += 1
 			jump_sound.play()
-			
-
+	
+	
 	# === HORIZONTAL MOVEMENT ===
 	var direction := Input.get_axis("move_left", "move_right")
 
@@ -52,6 +67,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
+
 	# === ANIMATION ===
 	if is_flying:
 		animated_sprite.play("jump")
@@ -64,4 +80,3 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("jump")
 
 	move_and_slide()
-	
